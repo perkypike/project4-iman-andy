@@ -4,9 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Project 4</title>
+    <!-- <link rel="shortcut icon" href="favicon.ico" type="image/x-icon"> -->
+    <title>Revelio</title>
+    <!-- Andy: depending how you you name your css file, might need to change the href path -->
+    <!-- <link rel='stylesheet' href='css/main.css'>  -->
 </head>
-<body>
+<body class='body'>
+    <!-- SKIP LINK TO MAIN CONTENT FOR ACCESSIBILITY -->
+    <a href='#main-content' class='skip-link'>Skip to main content</a>
+    <header class="header">
+        <!-- placeholder for upper corner details -->
+        <!-- google doesn't have a header tag section... -->
+    </header>
+    <main id="main-content">
+        <h1 class="body__heading">Revelio</h1>
+        <form action="" class="body__form">
+            <label for="search-field" class="visuallyhidden">Search Field</label>
+            <input type="text" name="search-field" pattern=".{3,}" class="body__search-input" required>
+        </form>    
+    </main>
+    <footer class="footer">
+        <!-- placeholder for bottom corner details -->
+    </footer>
 
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>
+    <script src='scripts/main.js'></script>
 </body>
 </html>
