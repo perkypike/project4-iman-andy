@@ -7,7 +7,7 @@
     <!-- <link rel="shortcut icon" href="favicon.ico" type="image/x-icon"> -->
     <title>Revelio</title>
     <!-- Andy: depending how you you name your css file, might need to change the href path -->
-    <!-- <link rel='stylesheet' href='css/main.css'>  -->
+    <link rel='stylesheet' href='styles/style.css'> 
 </head>
 <body class='body'>
     <!-- SKIP LINK TO MAIN CONTENT FOR ACCESSIBILITY -->
@@ -17,12 +17,14 @@
         <!-- google doesn't have a header tag section... -->
     </header>
     <main id="main-content">
-        <h1 class="body__heading">Revelio</h1>
-        <form action="" class="body__form">
-            <label for="search-field" class="visuallyhidden">Search Field</label>
-            <input type="text" name="search-field" pattern=".{3,}" class="body__search-input" required>
-            <input type="submit" class="body__search-submit">
-        </form>    
+        <div class="body__container">
+            <h1 class="body__heading">Revelio</h1>
+            <form action="" class="body__form">
+                <label for="search-field" class="visuallyhidden">Search Field</label>
+                <input type="text" name="search-field" pattern=".{3,}" class="body__search-input" placeholder="Search (ex. Malfoy)" required>
+                <input type="submit" class="body__search-submit">
+            </form>    
+        </div>
     </main>
     <footer class="footer">
         <!-- placeholder for bottom corner details -->
