@@ -37,13 +37,14 @@ revelioApp.initiateSearch = function() {
                 }
             }
         });
+
+        // call results function here, dont use return
     })
     .fail((err) => {
         console.log(err);
     });
 
-    console.log(revelioApp.searchResults);
-    return revelioApp.searchResults;
+    console.log(`I ran first: ${revelioApp.searchResults}`);
 }
 
 // on form submit, gets the value of the search text

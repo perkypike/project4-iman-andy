@@ -3,3 +3,5 @@ npm-debug.log
 .DS_Store
 prepros-6.config
 design
+styles/style.scss
+styles/style.css
