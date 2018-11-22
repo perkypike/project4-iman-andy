@@ -1,0 +1,70 @@
+// Global styles
+
+// Theme variables
+$primary-color: #231123; // background colour, dark purple
+$secondary-color: #82204a; // object and heading colour, bright purple
+$white-shade: #eff7ff; // body text, text shadow, light blue
+$accent-color: #e8db7d; // links, emphasis, yellow
+$fade-color: #473547; // box background colour, overlay, faded purple
+
+// Fonts
+$primary-font: 'Lobster', cursive; // cursive header font
+$secondary-font: 'Poppins', sans-serif; //sans-serif body font
+
+// Layout
+
+html {
+    font-size: 62.5%;
+    // 10px
+}
+
+body {
+    background: $primary-color;
+    color: $white-shade;
+    font-family: $secondary-font;
+    font-size: 1.4rem;
+}
+
+.wrapper {
+    max-width: 1000px;
+    width: 80%;
+    margin: 0 auto;
+}
+
+// Typography
+h1, h2, h3 {
+    margin: 0;
+    padding: 0;
+    font-family: $primary-font;
+    color: $secondary-color;
+    text-shadow: 1px 1px $white-shade;
+    text-align: center;
+}
+
+h1 {
+    font-size: 12rem;
+}
+
+h2 {
+    font-size: 10rem;
+}
+
+h3 {
+    font-size: 7rem;
+}
+
+p {
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+// Yellow bold text (date, etc.)
+span {
+    font-weight: 900;
+    color: $accent-color;
+}
