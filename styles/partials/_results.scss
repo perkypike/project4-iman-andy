@@ -1,1 +1,15 @@
 // Results styles
+
+#results {
+    display: none;
+    // min-height: 100vh;
+}
+
+.results-area {
+    display: grid;
+    grid-gap: 15px;
+    grid-template-columns: repeat(3, 1fr);
+    justify-content: center;
+    justify-items: center;
+    text-align: center;
+}
