@@ -4,12 +4,12 @@ revelioApp.profileCharacter = {
     animagus: 'black dog',
     bloodStatus: 'half-blood',
     boggart: "Lord Voldemort",
-    deathEater: false,
+    deathEater: true,
     dumbledoresArmy: true,
     house: 'Gryffindor',
     ministryOfMagic: false,
     name: 'Hannah Abbott',
-    orderOfThePhoenix: false,
+    orderOfThePhoenix: true,
     patronus: 'phoenix',
     role: 'student',
     school: 'Hogwarts School of Witchcraft and Wizardry',
@@ -57,16 +57,30 @@ revelioApp.updateProfileIconStats = function(){
         // check if icon characteristic exists and is true (otherwise, do nothing)
         if ( revelioApp.profileCharacter[item] != undefined && revelioApp.profileCharacter[item] != false ) {
             // check if icon matching property value exists
-            $('.${item}').load(`assets/icon-stats/${revelioApp.profileCharacter[item]}.png`, function (response, status, xhr) {
-            // if not, append default property icon to profile-icon-stats div
-                if (status == "error") {
-                    $(this).attr('src', 'assets/icon-stats/${item}.png');
+            $(`.${item}`).load(`assets/icon-stats/${revelioApp.profileCharacter[item]}.png`, function (response, status, xhr) {
+            // if not, substitute default property icon source to image
+                if (status == 'error' && item != 'patronus') {
+                    $(this).attr('src', `assets/icon-stats/${item}.png`);
                     $(this).attr('alt', revelioApp.profileCharacter.item);
+                    $(this).css("display", "inline-block");
+                    $(`.${item}-container`).css("display", "block");
+                    $(this).siblings().css("display", "inline-block");
+                    if ($(this).siblings().is(':empty')) {
+                        $(this).siblings().append(`${revelioApp.profileCharacter[item]}`);
+                    }
                 }
-            // if yes, append icon to profile-icon-stats div
+            // if no matching patronus icon, do nothing
+                else if (item === 'patronus') {
+                    return
+                }
+            // if yes, substitute icon source to image
                 else {
-                    $(this).attr('src', 'assets/icon-stats/${revelioApp.profileCharacter[item]}.png');
+                    $(this).attr('src', `assets/icon-stats/${revelioApp.profileCharacter[item]}.png`);
                     $(this).attr('alt', revelioApp.profileCharacter.item);
+                    $(this).css("display", "block");
+                    $(`.${item}-container`).css("display", "inline-block");
+                    $(this).siblings().css("display", "inline-block");
+                    $(this).siblings().append(`${revelioApp.profileCharacter[item]}`);
                 }
             })
         }
@@ -75,7 +89,6 @@ revelioApp.updateProfileIconStats = function(){
 
 // perform profile update functions
 $(function () {
-    // init?
     revelioApp.updateProfileHeading();
     revelioApp.updateProfilePicture();
     revelioApp.updateProfileIconStats();

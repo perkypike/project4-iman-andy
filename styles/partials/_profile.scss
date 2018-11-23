@@ -7,6 +7,7 @@
     grid-template-rows: auto auto auto;
     justify-content: space-between;
     text-align: center;
+    padding: 20px 0;
 }
 
 .profile-header h2, .profile-header img {
@@ -25,4 +26,70 @@
     border-radius: 50%;
     margin: 0 auto;
     border: 2px solid $fade-color;
+}
+
+// Profile icon stats
+.profile-icon-stats {
+    display: grid;
+    grid-gap: 15px;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 150px));
+    justify-content: center;
+    justify-items: center;
+    max-width: 810px;
+    margin: 0 auto;
+    padding: 20px 0;
+}
+
+.profile-icon-stats img {
+    display: none;
+    max-width: 100%;
+}
+
+.icon-container {
+    text-align: center;
+    display:none;
+}
+
+.icon-span {
+    color: $white-shade;
+    text-transform: uppercase;
+    font-weight: 400;
+    font-size: 1.8rem;
+    text-align: center;
+    display: none;
+}
+
+.school + .icon-span {
+    overflow: hidden;
+    height: 2rem;
+}
+
+// Profile text stats
+.profile-text-stats {
+    padding: 20px 0;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.text-container {
+    display: grid;
+    grid-template-columns: minmax(150px, 150px) 1fr;
+    grid-gap: 10px;
+}
+
+.profile-text-stats span {
+    display: block;
+    background: $fade-color;
+    padding: 10px;
+}
+
+.text-property {
+    font-weight: 900;
+    color: $accent-color;
+    display: block;
+    font-size: 2.5rem;
+}
+
+.text-span {
+    font-size: 2rem;
 }
