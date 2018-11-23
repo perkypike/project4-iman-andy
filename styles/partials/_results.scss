@@ -1,1 +1,34 @@
 // Results styles
+
+#results {
+    display: none;
+    // min-height: 100vh;
+}
+
+.results-area {
+    display: grid;
+    grid-gap: 15px;
+    grid-template-columns: repeat(3, 1fr);
+    justify-content: center;
+    justify-items: center;
+    text-align: center;
+}
+
+
+.results-area img {
+    display: block;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+@media (max-width: 620px) {
+    .results-area {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 440px) {
+    .results-area {
+        grid-template-columns: 1fr;
+    }
+}

@@ -8,4 +8,21 @@ article,aside,details,figcaption,figure,footer,header,hgroup,nav,section,summary
 
 .visuallyhidden:not(:focus):not(:active) { position: absolute; width: 1px; height: 1px; margin: -1px;border: 0;padding: 0;white-space: nowrap;clip-path: inset(100%);clip: rect(00 0 0);overflow: hidden;}
 
-.skip-link { position: absolute; left: -1000px; top: 5px; z-index: 999; background: white; color: black; } .skip-link:focus { left: 0; }
+.skip-link {
+    position: absolute;
+    left: -1000px;
+    top: 5px;
+    z-index: 999;
+    // background: $highlight-color;
+    // color: $font-color;
+    // font-family: $main-font;
+    font-size: 2rem;
+}
+
+.skip-link:focus {
+    text-align: center;
+    left: 50%;
+    transform: translate(-50%);
+}
+
+// .skip-link { position: absolute; left: -1000px; top: 5px; z-index: 999; background: white; color: black; } .skip-link:focus { left: 0; }
