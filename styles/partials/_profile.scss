@@ -1,6 +1,7 @@
 // Profile styles
 
 // Header
+// Grid container
 .profile-header {
     display: grid;
     grid-template-columns: auto auto;
@@ -10,10 +11,12 @@
     padding: 20px 0;
 }
 
+// Character name and image extends over 2 columns
 .profile-header h2, .profile-header img {
     grid-column: 1 / 3;
 }
 
+// Logo and search button on either ends of screen
 .profile-header h3:nth-child(1) {
     text-align: left;
 }
@@ -22,13 +25,16 @@
     text-align: right;
 }
 
+// Profile picture
 .profile-header img {
+    width: 200px;
     border-radius: 50%;
     margin: 0 auto;
     border: 2px solid $fade-color;
 }
 
-// Profile icon stats
+// Icon stats
+// Grid container
 .profile-icon-stats {
     display: grid;
     grid-gap: 15px;
@@ -37,9 +43,10 @@
     justify-items: center;
     max-width: 810px;
     margin: 0 auto;
-    padding: 20px 0;
+    padding: 50px 0 40px;
 }
 
+// Will display if exists
 .profile-icon-stats img {
     display: none;
     max-width: 100%;
@@ -50,6 +57,7 @@
     display:none;
 }
 
+// Characteristic text
 .icon-span {
     color: $white-shade;
     text-transform: uppercase;
@@ -59,37 +67,157 @@
     display: none;
 }
 
+// Only want to show first word of school's name
 .school + .icon-span {
     overflow: hidden;
     height: 2rem;
 }
 
-// Profile text stats
+// Text stats
 .profile-text-stats {
-    padding: 20px 0;
+    padding: 0 0 65px 0;
     max-width: 800px;
     margin: 0 auto;
 }
 
-.text-container {
-    display: grid;
-    grid-template-columns: minmax(150px, 150px) 1fr;
-    grid-gap: 10px;
+// Ampersand heading
+.profile-text-stats h2 {
+    position: relative;
+    bottom: -35px;
 }
 
+// Grid container for each stat
+.text-container {
+    grid-template-columns: minmax(215px, 215px) 1fr;
+    grid-gap: 10px;
+    display: none;
+}
+
+// Applies to both spans for each property
 .profile-text-stats span {
     display: block;
     background: $fade-color;
-    padding: 10px;
+    padding: 0 20px 0 20px;
 }
 
+// Applies to property name
 .text-property {
+    text-transform: uppercase;
     font-weight: 900;
     color: $accent-color;
     display: block;
     font-size: 2.5rem;
+    text-align: right;
 }
 
-.text-span {
+// Applies to property value
+.text-value {
     font-size: 2rem;
+    text-transform: capitalize;
+}
+
+// Add space around text container when any text characteristic exists
+.divider {
+    display: none;
+}
+
+.divider-span {
+    height: 10px;
+    background: $fade-color;
+}
+
+// Status updates
+// Applies to all status update spans
+.status-updates-span {
+    display: block;
+    background: $fade-color;
+    padding: 20px;
+}
+
+// Quote status update
+// Grid container
+.profile-quote-status {
+    display: none;
+    grid-template-columns: 1fr 150px;
+    grid-gap: 10px;
+    padding: 0 0 30px 0;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+// Quote symbol and quote text grid container
+.quote {
+    display: grid;
+    grid-template-columns: auto 1fr;
+}
+
+// Quote symbol
+.quote-symbol {
+    font-weight: 900;
+    color: $accent-color;
+    font-size: 10rem;
+    text-align: right;
+    padding-top: 0;
+    padding-right: 0;
+}
+
+// Quote text
+.status {
+    font-size: 2rem;
+    padding-left: 8px;
+    padding-top: 15px;
+}
+
+// Quote date
+.date {
+    font-weight: 900;
+    color: $accent-color;
+    font-size: 2rem;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+// Friend status update
+// Grid container
+.profile-friend-status {
+    display: grid;
+    grid-template-columns: 150px 1fr;
+    grid-gap: 10px;
+    padding: 0 0 30px 0;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+// Status text
+.status {
+    font-size: 2rem;
+    padding-left: 8px;
+    padding-top: 15px;
+}
+
+.profile-friend-status .status {
+    padding-left: 20px;
+}
+
+// Quote date
+.date {
+    font-weight: 900;
+    color: $accent-color;
+    font-size: 2rem;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+// Location status update
+.profile-location-status {
+    display: none;
+    grid-template-columns: 1fr 150px;
+    grid-gap: 10px;
+    padding: 0 0 30px 0;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.profile-location-status .status {
+    padding-left: 20px;
 }
