@@ -16,9 +16,12 @@
 
 
 .results-area img {
+    z-index: 10;
+    background-color: linear-gradient(to right, rgba(71, 53, 71, 0.4), rgba(71, 53, 71, 0.4));
     display: block;
-    max-width: 100%;
-    max-height: 100%;
+    // max-width does not play very well with outputting image on Chrome...
+    // max-width: 100%;
+    // max-height: 100%;
 }
 
 @media (max-width: 620px) {
