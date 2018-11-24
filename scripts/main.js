@@ -83,9 +83,10 @@ revelioApp.getHouseMembers = function(selectedHouse) {
     // returns character IDs of that house in houseResults array
     revelioApp.getAPIData("houses");
     $.when(revelioApp.getData).then((houseArray) => {
-        // for each character in the characterArray...
+        // for each house, check if it matches the selectedHouse
         houseArray.forEach(function (houseObject) {
             if (houseObject.name === selectedHouse) {
+                // store the array of id members in a revelioApp.houseResults
                 revelioApp.houseResults = houseObject.members;
             }
         });
