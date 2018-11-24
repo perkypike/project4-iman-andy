@@ -2,6 +2,7 @@ const revelioApp = {};
 revelioApp.searchText = "";
 revelioApp.rawResults = [];
 revelioApp.searchResults = [];
+revelioApp.houseResults = [];
 revelioApp.regExName = "";
 revelioApp.regExBoolean = "";
 revelioApp.regExNotName = "";
@@ -32,10 +33,10 @@ revelioApp.initiateSearch = function () {
 
     // clear prev results and get character data from API
     revelioApp.clearResults();
-    revelioApp.getCharacterData();
+    revelioApp.getAPIData("characters");
 
     // wait until character data is retrieved, THEN filter results based on some regular expressions
-    $.when(revelioApp.getCharacter)
+    $.when(revelioApp.getData)
     .then((characterArray) => {
         // for each character in the characterArray...
         // !!you can check forEach parameters to make this easier!!...
@@ -67,15 +68,28 @@ revelioApp.clearResults = function () {
 
 
 // get character data from API
-revelioApp.getCharacterData = function() {
-    revelioApp.getCharacter = $.ajax({
-        url: `${revelioApp.url}characters/`,
+revelioApp.getAPIData = function(id) {
+    revelioApp.getData = $.ajax({
+        url: `${revelioApp.url}${id}/`,
         dataType: 'json',
         method: 'GET',
         data: {
             key: revelioApp.key
         }
     });
+}
+
+revelioApp.getHouseMembers = function(selectedHouse) {
+    // returns character IDs of that house in houseResults array
+    revelioApp.getAPIData("houses");
+    $.when(revelioApp.getData).then((houseArray) => {
+        // for each character in the characterArray...
+        houseArray.forEach(function (houseObject) {
+            if (houseObject.name === selectedHouse) {
+                revelioApp.houseResults = houseObject.members;
+            }
+        });
+    })
 }
 
 // filter search results
