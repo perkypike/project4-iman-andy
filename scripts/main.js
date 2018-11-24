@@ -10,7 +10,6 @@ revelioApp.url = "https://www.potterapi.com/v1/";
 revelioApp.key = "$2a$10$uBFyQUBe.1xJ1KYkmh9sIeYHT3T7v8loA1CosKCCffl4YD5XYVcS."
 
 // easter egg ideas: niffler on the top, money raining down
-// dumbledore party
 
 // initialize
 revelioApp.init = function () {
@@ -47,10 +46,11 @@ revelioApp.initiateSearch = function () {
             }
             // Set type is an object contains only unique values/objects (removes duplicates), using spread operator to turn it back to Array
             revelioApp.searchResults = [...new Set(revelioApp.rawResults)];
-        });
-
-        // display results on #results page
-        revelioApp.displayResults(revelioApp.searchResults, revelioApp.checkProfilePicture, revelioApp.animateScroll);
+        })
+        revelioApp.displayResults(revelioApp.searchResults, revelioApp.displayProfilePicture);
+    }).then(() => {
+        // we want all the filters complete before scrolling down so we set chain another Promise
+        revelioApp.animateScroll('#results');
     })
     // error handling
     .fail((err) => {
@@ -114,33 +114,41 @@ revelioApp.matchSearchFields = function (charField, charObject) {
 }
 
 // display results on the #results page
-revelioApp.displayResults = function (resultsArray, imageCheck, scroll) {
-    resultsArray.forEach(function (characterObject) {
-        $('section#results > div > div').append(`<div><img><p>${characterObject.name}</p></div>`);
-        imageCheck(characterObject.name);
-    });
-    scroll("#results");
+revelioApp.displayResults = function (resultsArray, displayImage) {
+    for (let i = 0; i < resultsArray.length; i++) {
+        $('section#results > div > div').append(`<div class='character character-container-${i+1}'><img class='character-picture'><p>${resultsArray[i].name}</p></div>`);
+        displayImage(resultsArray[i].name);
+    }
+    revelioApp.showProfile();
 }
 
-//similar to profile.js 's function, may be combined
-revelioApp.checkProfilePicture = function (name) {
+revelioApp.showProfile = function() {
+    $('.character-picture').on('click', function() {
+        // revelioApp.profileCharacter = $(this).next().text();
+        $('profile-modal-popup').fadeIn('slow', function() {
+            $('.profile-modal.popup').css('display', 'block');
+        })
+        // $('.profile-close-button').on('click', function () {
+        //     grid.hideProfile();
+        // });
+    })
+}
+
+revelioApp.displayProfilePicture = function(name) {
     // convert character name string to name with hyphens
     const fileName = name.replace(' ', '-');
-    // check if gif exists
-    $('section#results img').load(`assets/profile-pictures/${fileName}.gif`, function (response, status, xhr) {
-        console.log(status);
-        // if error, use default and add alt with character name
-        if (status === "error") {
-            console.log('yay');
-            $(this).attr('src', 'assets/profile-pictures/default-static.gif');
-            $(this).attr('alt', name);
-        }
-        // if it does, use URL and add alt with character name
-        else {
-            $(this).attr('src', `assets/profile-pictures/${fileName}.gif`);
-            $(this).attr('alt', name);
-        }
+    revelioApp.errorImageCheck();
+    $('section#results img').load(`assets/profile-pictures/${fileName}.png`, function() {
+        $(this).attr('src', `assets/profile-pictures/${fileName}.png`);
+        $(this).attr('alt', name);
     });
+}
+
+revelioApp.errorImageCheck = function() {
+    $('img').on('error', function () {
+        $(this).attr('src', 'assets/profile-pictures/default-static.gif');
+        $(this).attr('alt', 'spooky ghost');
+    })
 }
 
 // smooth-scroll
