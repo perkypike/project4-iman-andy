@@ -1,7 +1,9 @@
 const revelioApp = {};
+revelioApp.profileCharacter = {};
 revelioApp.searchText = "";
 revelioApp.rawResults = [];
 revelioApp.searchResults = [];
+revelioApp.charNameObjectPair = {};
 revelioApp.houseResults = [];
 revelioApp.regExName = "";
 revelioApp.regExBoolean = "";
@@ -116,22 +118,39 @@ revelioApp.matchSearchFields = function (charField, charObject) {
 // display results on the #results page
 revelioApp.displayResults = function (resultsArray, displayImage) {
     for (let i = 0; i < resultsArray.length; i++) {
-        $('section#results > div > div').append(`<div class='character character-container-${i+1}'><img class='character-picture'><p>${resultsArray[i].name}</p></div>`);
+        $('section#results > div > div').append(`<figure class='character character-container-${i+1}'><img class='character-picture'><figcaption>${resultsArray[i].name}</figcaption></figure>`);
+        // Chrome does not like styles below...
+        // $('section#results img').css('max-width', '100%');
+        // $('section#results img').css('max-height', '100%');
         displayImage(resultsArray[i].name);
+        revelioApp.charNameObjectPair[resultsArray[i].name] = resultsArray[i];
+        console.log(revelioApp.charNameObjectPair);
     }
     revelioApp.showProfile();
 }
 
 revelioApp.showProfile = function() {
     $('.character-picture').on('click', function() {
-        // revelioApp.profileCharacter = $(this).next().text();
-        $('profile-modal-popup').fadeIn('slow', function() {
-            $('.profile-modal.popup').css('display', 'block');
+        revelioApp.profileCharacter = revelioApp.charNameObjectPair[$(this).next().text()];
+        console.log(revelioApp.profileCharacter);
+        $('.profile').fadeIn('slow', function() {
+            $('.profile').css('display', 'block');
+            revelioApp.updateProfileHeading();
+            revelioApp.updateProfilePicture();
+            revelioApp.updateProfileIconStats();
+            revelioApp.updateProfileTextStats();
+            revelioApp.updateQuote();
+            revelioApp.updateLocation();
         })
-        // $('.profile-close-button').on('click', function () {
-        //     grid.hideProfile();
-        // });
+        $('h3').on('click', function () {
+            revelioApp.hideProfile();
+        });
     })
+}
+
+revelioApp.hideProfile = function() {
+    $('.profile').fadeOut('slow', function() {
+    });
 }
 
 revelioApp.displayProfilePicture = function(name) {
