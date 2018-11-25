@@ -127,13 +127,57 @@ revelioApp.updateProfileTextStats = function () {
     revelioApp.profileTextCharacteristics.forEach(function (item) {
         // check if text characteristic exists and is not unknown (otherwise, do nothing)
         if (revelioApp.profileCharacter[item] != undefined && revelioApp.profileCharacter[item] != 'unknown') {
-            // if yes, show item text container and dividers
+            // if yes, show item text container, header and dividers
+            $(`.profile-text-stats h2`).css('display', 'block')
             $(`.${item}-container`).css('display', 'grid');
             $('.divider').css('display', 'grid');
             // append value of item to value span
             $(`.${item}`).append(revelioApp.profileCharacter[item]);
         }
     })
+};
+
+// Get 3 random dates in chronological order for status updates
+revelioApp.dates = function(){
+    // empty array to store dates
+    revelioApp.datesArray = [];
+    // need dates between these points
+    start = new Date(1991, 11, 1);
+    end = new Date(1998, 04, 20);
+    // loop 3 times
+    for (i = 0; i < 3; i++) {
+        // random date, define month
+        date = new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
+        // format month, day, year, time stamp
+        months = [`Jan.`, `Feb.`, `Mar.`, `Apr.`, `May`, `Jun.`, `Jul.`, `Aug.`, `Sep.`, `Oct.`, `Nov.`, `Dec.`];
+        month = months['' + date.getMonth()];
+        day = '' + date.getDate() + ',';
+        year = date.getFullYear() + ' @';
+        time = date.toLocaleTimeString().replace(/([\d]+:[\d]{2})(:[\d]{2})(.*)/, "$1$3");
+        // store number of milliseconds since midnight Jan 1 1970 - will use to sort dates
+        dateMs = date.getTime();
+        finalDate = [month, day, year, time].join(' ');
+        revelioApp.datesArray.push({dateMs, finalDate});
+    };
+    // sort date into new array in chronological order
+    // empty array to store dateMs
+    datesMsArray = [];
+    // store dateMs in new array
+    revelioApp.datesArray.forEach(function(item) {
+        datesMsArray.push(item.dateMs);
+    });
+    // sort datesMs
+    datesMsArray.sort();
+    // empty array for final dates in chronological order
+    revelioApp.finalDatesArray = [];
+    // for each dateMs, find matching finalDate and push to finalDatesArray
+    datesMsArray.forEach(function (item) {
+        revelioApp.datesArray.forEach(function (dateObj) {
+            if ( item === dateObj.dateMs ) {
+                revelioApp.finalDatesArray.push(dateObj.finalDate);
+            }
+        });
+    });
 };
 
 // Update quote text with character quote, if one exists
@@ -150,10 +194,18 @@ revelioApp.updateQuote = function () {
             let quote = quotes[Math.floor(Math.random() * quotes.length)];
             // append quote to quote span
             $(`.quote .status`).append(quote);
+            // append most recent date to date span
+            $(`.profile-quote-status .date`).append(revelioApp.finalDatesArray[2]);
             // display quote
             $(`.profile-quote-status`).css('display', 'grid');
         }
     }
+};
+
+// Update character's friend status
+revelioApp.updateFriendStatus = function () {
+    // append second date to date span
+    $(`.profile-friend-status .date`).append(revelioApp.finalDatesArray[1]);
 };
 
 // Update character's location
@@ -162,6 +214,8 @@ revelioApp.updateLocation = function () {
     let location = revelioApp.locations[Math.floor(Math.random() * revelioApp.locations.length)];
     // append location to location span
     $(`.profile-location-status .status`).append(`${revelioApp.profileCharacter.name} checked in at ${location}.`);
+    // append earliest date to date span
+    $(`.profile-location-status .date`).append(revelioApp.finalDatesArray[0]);
     // display location
     $(`.profile-location-status`).css('display', 'grid')
 };
@@ -172,6 +226,8 @@ $(function () {
     revelioApp.updateProfilePicture();
     revelioApp.updateProfileIconStats();
     revelioApp.updateProfileTextStats();
+    revelioApp.dates();
     revelioApp.updateQuote();
+    revelioApp.updateFriendStatus();
     revelioApp.updateLocation();
 });
