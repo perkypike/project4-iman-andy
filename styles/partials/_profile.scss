@@ -75,13 +75,14 @@
 
 // Text stats
 .profile-text-stats {
-    padding: 0 0 65px 0;
+    padding: 0 0 30px 0;
     max-width: 800px;
     margin: 0 auto;
 }
 
 // Ampersand heading
 .profile-text-stats h2 {
+    display: none;
     position: relative;
     bottom: -35px;
 }
@@ -220,4 +221,38 @@
 
 .profile-location-status .status {
     padding-left: 20px;
+}
+
+// Friends list
+.profile-friends-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: auto auto;
+    grid-gap: 10px;
+    padding: 0 0 30px 0;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.profile-friends-list img {
+    width: 100%;
+}
+
+h2.friends {
+    text-align: right;
+    font-size: 8rem;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.friend {
+    display: grid;
+    grid-template-rows: auto 1fr;
+}
+
+caption {
+    text-transform: uppercase;
+    background: $fade-color;
+    margin: 0;
+    padding: 5px;
 }
