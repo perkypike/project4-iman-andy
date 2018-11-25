@@ -11,8 +11,6 @@ revelioApp.regExNotName = "";
 revelioApp.url = "https://www.potterapi.com/v1/";
 revelioApp.key = "$2a$10$uBFyQUBe.1xJ1KYkmh9sIeYHT3T7v8loA1CosKCCffl4YD5XYVcS."
 
-// easter egg ideas: niffler on the top, money raining down
-
 // initialize
 revelioApp.init = function () {
     revelioApp.getSearchText(revelioApp.initiateSearch);
@@ -117,16 +115,18 @@ revelioApp.matchSearchFields = function (charField, charObject) {
 
 // display results on the #results page
 revelioApp.displayResults = function (resultsArray, displayImage) {
-    for (let i = 0; i < resultsArray.length; i++) {
-        $('section#results > div > div').append(`<figure class='character character-container-${i+1}'><img class='character-picture'><figcaption>${resultsArray[i].name}</figcaption></figure>`);
-        // Chrome does not like styles below...
-        // $('section#results img').css('max-width', '100%');
-        // $('section#results img').css('max-height', '100%');
-        displayImage(resultsArray[i].name);
-        revelioApp.charNameObjectPair[resultsArray[i].name] = resultsArray[i];
-        console.log(revelioApp.charNameObjectPair);
+    if (resultsArray.length === 0) {
+        $('section#results > div > div').append(`<p class="results-error">No results! Try again, ya muggle!</p>`);
     }
-    revelioApp.showProfile();
+    else {
+        for (let i = 0; i < resultsArray.length; i++) {
+            $('section#results > div > div').append(`<figure class='character character-container-${i+1}'><img class='character-picture'><figcaption>${resultsArray[i].name}</figcaption></figure>`);
+            displayImage(resultsArray[i].name);
+            revelioApp.charNameObjectPair[resultsArray[i].name] = resultsArray[i];
+            console.log(revelioApp.charNameObjectPair);
+        }
+        revelioApp.showProfile();
+    }
 }
 
 revelioApp.showProfile = function() {
@@ -139,8 +139,11 @@ revelioApp.showProfile = function() {
             revelioApp.updateProfilePicture();
             revelioApp.updateProfileIconStats();
             revelioApp.updateProfileTextStats();
+            revelioApp.dates();
             revelioApp.updateQuote();
+            revelioApp.groupCharacters();
             revelioApp.updateLocation();
+            $('#results').css('display', 'none');
         })
         $('h3').on('click', function () {
             revelioApp.hideProfile();
@@ -151,6 +154,8 @@ revelioApp.showProfile = function() {
 revelioApp.hideProfile = function() {
     $('.profile').fadeOut('slow', function() {
     });
+    $('#results').css('display', 'block');
+    document.title = `REVELIO`;
 }
 
 revelioApp.displayProfilePicture = function(name) {

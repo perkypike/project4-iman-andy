@@ -8,10 +8,42 @@
     align-items: center;
 }
 
+.search .wrapper {
+    text-align: center;
+}
+
+.search p {
+    font-size: 2rem;
+}
+
+.search-heading {
+    text-transform: uppercase;
+}
+
+input[type=text] {
+    padding: 10px 20px;
+    width: 30vw;
+    margin-bottom: 20px;
+}
+
 .search > div,
 .search-form {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+input[type=submit] {
+    color: $white-shade;
+    border: none;
+    background-color: $secondary-color;
+    padding: 10px 20px;
+    transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out;
+
+}
+
+input[type=submit]:hover {
+    color: $secondary-color;
+    background-color: $white-shade;
 }

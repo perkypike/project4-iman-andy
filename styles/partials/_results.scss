@@ -2,26 +2,43 @@
 
 #results {
     display: none;
-    // min-height: 100vh;
 }
 
 .results-area {
+    position: relative;
     display: grid;
     grid-gap: 15px;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     justify-content: center;
     justify-items: center;
     text-align: center;
 }
 
+.results-error {
+    font-size: 2rem;
+    position: absolute;
+    top: 160px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.results-area figure {
+    width: 100%;
+}
 
 .results-area img {
     z-index: 10;
     background-color: linear-gradient(to right, rgba(71, 53, 71, 0.4), rgba(71, 53, 71, 0.4));
     display: block;
-    // max-width does not play very well with outputting image on Chrome...
-    // max-width: 100%;
-    // max-height: 100%;
+    width: 100%;
+    cursor: pointer;
+}
+
+.results-area figcaption {
+    text-transform: uppercase;
+    background: $fade-color;
+    margin: 0;
+    padding: 5px;
 }
 
 .profile {
@@ -37,9 +54,32 @@
     background: $primary-color;
 }
 
-@media (max-width: 700px) {
+
+@media (max-width: 1000px) {
+    .results-area {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    input[type=text] {
+        width: 40vw;
+    }
+}
+
+
+@media (max-width: 760px) {
     .results-area {
         grid-template-columns: repeat(2, 1fr);
+    }
+
+    input[type=text] {
+        width: 50vw;
+    }
+}
+
+@media (max-width: 560px) {
+
+    input[type=text] {
+        width: 60vw;
     }
 }
 

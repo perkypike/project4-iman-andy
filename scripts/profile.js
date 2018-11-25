@@ -1,24 +1,3 @@
-// will be passed an object with properties for the character selected by the user, temporary object for now:
-revelioApp.profileCharacter = {
-    alias: 'Padfoot',
-    animagus: 'black dog',
-    bloodStatus: 'half-blood',
-    boggart: "Lord Voldemort",
-    // deathEater: true,
-    dumbledoresArmy: true,
-    // house: 'Gryffindor',
-    ministryOfMagic: true,
-    name: 'Ronald Weasley',
-    orderOfThePhoenix: true,
-    patronus: 'phoenix',
-    role: 'student',
-    // school: 'Hogwarts School of Witchcraft and Wizardry',
-    species: 'ghost',
-    wand: 'Ash, 12 1/4", unicorn hair',
-    __v: 0,
-    _id: '5a0fa4daae5bc100213c232e'
-}
-
 revelioApp.profileIconCharacteristics = [
     'school', 'house', 'species', 'dumbledoresArmy', 'bloodStatus', 'patronus', 'deathEater', 'orderOfThePhoenix', 'ministryOfMagic'
 ]
@@ -286,8 +265,6 @@ revelioApp.updateFriendsListDiv = function(){
         $(`.friend-${i}-img`).load(`assets/profile-pictures/${friendNameHyphen}.gif`, function (response, status, xhr) {
             // if error, use default and add alt with character name
             if (status == "error") {
-                console.log(friendName);
-                console.log(friendNameHyphen);
                 $(this).attr('src', 'assets/profile-pictures/default.gif');
                 $(this).attr('alt', friendName);
             }
@@ -313,13 +290,13 @@ revelioApp.updateLocation = function () {
 };
 
 // perform profile update functions
-$(function () {
-    revelioApp.updateProfileHeading();
-    revelioApp.updateProfilePicture();
-    revelioApp.updateProfileIconStats();
-    revelioApp.updateProfileTextStats();
-    revelioApp.dates();
-    revelioApp.updateQuote();
-    revelioApp.groupCharacters();
-    revelioApp.updateLocation();
-});
+// $(function () {
+//     revelioApp.updateProfileHeading();
+//     revelioApp.updateProfilePicture();
+//     revelioApp.updateProfileIconStats();
+//     revelioApp.updateProfileTextStats();
+//     revelioApp.dates();
+//     revelioApp.updateQuote();
+//     revelioApp.groupCharacters();
+//     revelioApp.updateLocation();
+// });
