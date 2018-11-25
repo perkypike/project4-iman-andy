@@ -1,5 +1,19 @@
 // Profile styles
 
+// Overlay container
+.profile {
+    width: 100vw;
+    height: 100vh;
+    margin: 0 auto;
+    position: fixed;
+    overflow-y: scroll;
+    top: 0;
+    left: 0;
+    z-index: 20;
+    display: none;
+    background: $primary-color;
+}
+
 // Header
 // Grid container
 .profile-header {

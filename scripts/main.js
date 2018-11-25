@@ -1,56 +1,57 @@
-const revelioApp = {};
-revelioApp.profileCharacter = {};
-revelioApp.searchText = "";
-revelioApp.rawResults = [];
-revelioApp.searchResults = [];
-revelioApp.charNameObjectPair = {};
-revelioApp.houseResults = [];
-revelioApp.regExName = "";
-revelioApp.regExBoolean = "";
-revelioApp.regExNotName = "";
-revelioApp.url = "https://www.potterapi.com/v1/";
-revelioApp.key = "$2a$10$uBFyQUBe.1xJ1KYkmh9sIeYHT3T7v8loA1CosKCCffl4YD5XYVcS."
+const app = {};
+app.profileCharacter = {};
+app.searchText = "";
+app.rawResults = [];
+app.searchResults = [];
+app.charNameObjectPair = {};
+app.friendsNameObjectPair = {};
+app.houseResults = [];
+app.regExName = "";
+app.regExBoolean = "";
+app.regExNotName = "";
+app.url = "https://www.potterapi.com/v1/";
+app.key = "$2a$10$uBFyQUBe.1xJ1KYkmh9sIeYHT3T7v8loA1CosKCCffl4YD5XYVcS."
 
 // initialize
-revelioApp.init = function () {
-    revelioApp.getSearchText(revelioApp.initiateSearch);
+app.init = function () {
+    app.getSearchText(app.initiateSearch);
 }
 
 // on form submit, gets the value of the search text
-revelioApp.getSearchText = function (startSearch) {
+app.getSearchText = function (startSearch) {
     $('.search-form').on('submit', function (event) {
         event.preventDefault();
-        revelioApp.searchText = $('input[type=text]').val();
-        revelioApp.regExName = new RegExp(revelioApp.searchText, 'i');
-        revelioApp.regExNotName = new RegExp('^' + revelioApp.searchText + '$', 'i');
+        app.searchText = $('input[type=text]').val();
+        app.regExName = new RegExp(app.searchText, 'i');
+        app.regExNotName = new RegExp('^' + app.searchText + '$', 'i');
         startSearch();
     });
 }
 
 // initiate search
-revelioApp.initiateSearch = function () {
+app.initiateSearch = function () {
 
     // clear prev results and get character data from API
-    revelioApp.clearResults();
-    revelioApp.getAPIData("characters");
+    app.clearResults();
+    app.getAPIData("characters");
 
     // wait until character data is retrieved, THEN filter results based on some regular expressions
-    $.when(revelioApp.getData)
+    $.when(app.getData)
     .then((characterArray) => {
         // for each character in the characterArray...
         // !!you can check forEach parameters to make this easier!!...
         characterArray.forEach(function (charactersObject) {
             // go through all the keys in that character object and filter results
             for (let character in charactersObject) {
-                revelioApp.matchSearchFields(character, charactersObject);
+                app.matchSearchFields(character, charactersObject);
             }
             // Set type is an object contains only unique values/objects (removes duplicates), using spread operator to turn it back to Array
-            revelioApp.searchResults = [...new Set(revelioApp.rawResults)];
+            app.searchResults = [...new Set(app.rawResults)];
         })
-        revelioApp.displayResults(revelioApp.searchResults, revelioApp.displayProfilePicture);
+        app.displayResults(app.searchResults, app.displayProfilePicture);
     }).then(() => {
         // we want all the filters complete before scrolling down so we set chain another Promise
-        revelioApp.animateScroll('#results');
+        app.animateScroll('#results');
     })
     // error handling
     .fail((err) => {
@@ -59,62 +60,63 @@ revelioApp.initiateSearch = function () {
 }
 
 // clear search results
-revelioApp.clearResults = function () {
+app.clearResults = function () {
     // reset search results array in case of new search
-    revelioApp.rawResults = [];
-    revelioApp.searchResults = [];
+    app.rawResults = [];
+    app.searchResults = [];
     $('section#results > div > div').empty();
 }
 
 
 // get character data from API
-revelioApp.getAPIData = function(id) {
-    revelioApp.getData = $.ajax({
-        url: `${revelioApp.url}${id}/`,
+app.getAPIData = function(id) {
+    app.getData = $.ajax({
+        url: `${app.url}${id}/`,
         dataType: 'json',
         method: 'GET',
         data: {
-            key: revelioApp.key
+            key: app.key
         }
     });
 }
 
-revelioApp.getHouseMembers = function(selectedHouse) {
+// get house data from API
+app.getHouseMembers = function(selectedHouse) {
     // returns character IDs of that house in houseResults array
-    revelioApp.getAPIData("houses");
-    $.when(revelioApp.getData).then((houseArray) => {
+    app.getAPIData("houses");
+    $.when(app.getData).then((houseArray) => {
         // for each house, check if it matches the selectedHouse
         houseArray.forEach(function (houseObject) {
             if (houseObject.name === selectedHouse) {
-                // store the array of id members in a revelioApp.houseResults
-                revelioApp.houseResults = houseObject.members;
+                // store the array of id members in a app.houseResults
+                app.houseResults = houseObject.members;
             }
         });
     })
 }
 
 // filter search results
-revelioApp.matchSearchFields = function (charField, charObject) {
+app.matchSearchFields = function (charField, charObject) {
     // if the key is name, as long as the search text is a substring of the name, add it to results
-    if ((charField === 'name') && (revelioApp.regExName).test(charObject[charField])) {
-        revelioApp.rawResults.push(charObject);
+    if ((charField === 'name') && (app.regExName).test(charObject[charField])) {
+        app.rawResults.push(charObject);
     }
     // if the field is a boolean field, creates a new string of the boolean field name with spaces and match the search text, if it's the same then add it to results
     else if (charObject[charField] === true) {
-        revelioApp.regExBoolean = charField.replace(/([A-Z])/g, ' $1').trim();
-        if (revelioApp.regExNotName.test(revelioApp.regExBoolean)) {
-            revelioApp.rawResults.push(charObject);
+        app.regExBoolean = charField.replace(/([A-Z])/g, ' $1').trim();
+        if (app.regExNotName.test(app.regExBoolean)) {
+            app.rawResults.push(charObject);
         }
     }
     // otherwise, use the stricter regular expression on other keys to check
     // another regex is needed for boolean entries
-    else if ((revelioApp.regExNotName).test(charObject[charField])) {
-        revelioApp.rawResults.push(charObject);
+    else if ((app.regExNotName).test(charObject[charField])) {
+        app.rawResults.push(charObject);
     }
 }
 
 // display results on the #results page
-revelioApp.displayResults = function (resultsArray, displayImage) {
+app.displayResults = function (resultsArray, displayImage) {
     if (resultsArray.length === 0) {
         $('section#results > div > div').append(`<p class="results-error">No results! Try again, ya muggle!</p>`);
     }
@@ -122,61 +124,56 @@ revelioApp.displayResults = function (resultsArray, displayImage) {
         for (let i = 0; i < resultsArray.length; i++) {
             $('section#results > div > div').append(`<figure class='character character-container-${i+1}'><img class='character-picture'><figcaption>${resultsArray[i].name}</figcaption></figure>`);
             displayImage(resultsArray[i].name);
-            revelioApp.charNameObjectPair[resultsArray[i].name] = resultsArray[i];
-            console.log(revelioApp.charNameObjectPair);
+            app.charNameObjectPair[resultsArray[i].name] = resultsArray[i];
+            console.log(app.charNameObjectPair);
         }
-        revelioApp.showProfile();
+        app.showProfile('.character-picture', app.charNameObjectPair);
     }
 }
 
-revelioApp.showProfile = function() {
-    $('.character-picture').on('click', function() {
-        revelioApp.profileCharacter = revelioApp.charNameObjectPair[$(this).next().text()];
-        console.log(revelioApp.profileCharacter);
+
+app.showProfile = function(element, nameObjectPair) {
+    $(element).on('click', function() {
+        app.profileCharacter = nameObjectPair[$(this).next().text()];
+        console.log(app.profileCharacter);
         $('.profile').fadeIn('slow', function() {
             $('.profile').css('display', 'block');
-            revelioApp.updateProfileHeading();
-            revelioApp.updateProfilePicture();
-            revelioApp.updateProfileIconStats();
-            revelioApp.updateProfileTextStats();
-            revelioApp.dates();
-            revelioApp.updateQuote();
-            revelioApp.groupCharacters();
-            revelioApp.updateLocation();
+            app.updateProfile();
             $('#results').css('display', 'none');
         })
         $('h3').on('click', function () {
-            revelioApp.hideProfile();
+            app.hideProfile();
         });
+        // setTimeout(window.scrollTo(0, 0), 200);
     })
 }
 
-revelioApp.hideProfile = function() {
+app.hideProfile = function() {
     $('.profile').fadeOut('slow', function() {
     });
     $('#results').css('display', 'block');
     document.title = `REVELIO`;
 }
 
-revelioApp.displayProfilePicture = function(name) {
+app.displayProfilePicture = function(name) {
     // convert character name string to name with hyphens
     const fileName = name.replace(' ', '-');
-    revelioApp.errorImageCheck();
-    $('section#results img').load(`assets/profile-pictures/${fileName}.png`, function() {
-        $(this).attr('src', `assets/profile-pictures/${fileName}.png`);
+    app.errorImageCheck();
+    $('section#results img').load(`assets/profile-pictures/${fileName}-static.png`, function() {
+        $(this).attr('src', `assets/profile-pictures/${fileName}-static.png`);
         $(this).attr('alt', name);
     });
 }
 
-revelioApp.errorImageCheck = function() {
+app.errorImageCheck = function() {
     $('img').on('error', function () {
-        $(this).attr('src', 'assets/profile-pictures/default-static.gif');
+        $(this).attr('src', 'assets/profile-pictures/default-static.png');
         $(this).attr('alt', 'spooky ghost');
     })
 }
 
 // smooth-scroll
-revelioApp.animateScroll = function (htmlID) {
+app.animateScroll = function (htmlID) {
     $(htmlID).css('display', 'block');
     $(htmlID).css('min-height', '100vh');
     $('html, body').animate({
@@ -185,5 +182,5 @@ revelioApp.animateScroll = function (htmlID) {
 }
 
 $(function () {
-    revelioApp.init();
+    app.init();
 });
