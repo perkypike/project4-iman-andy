@@ -4,16 +4,16 @@ revelioApp.profileCharacter = {
     animagus: 'black dog',
     bloodStatus: 'half-blood',
     boggart: "Lord Voldemort",
-    deathEater: true,
+    // deathEater: true,
     dumbledoresArmy: true,
-    house: 'Gryffindor',
+    // house: 'Gryffindor',
     ministryOfMagic: true,
     name: 'Ronald Weasley',
     orderOfThePhoenix: true,
     patronus: 'phoenix',
     role: 'student',
-    school: 'Hogwarts School of Witchcraft and Wizardry',
-    species: 'human',
+    // school: 'Hogwarts School of Witchcraft and Wizardry',
+    species: 'ghost',
     wand: 'Ash, 12 1/4", unicorn hair',
     __v: 0,
     _id: '5a0fa4daae5bc100213c232e'
@@ -52,7 +52,9 @@ revelioApp.quotes = {
 
     GeorgeWeasley: [`New study finds Death Eaters have the worst grammar on Revelio. &#xF602`],
 
-    DracoMalfoy: [`I do feel so sorry for all those people who have to stay at Hogwarts for Christmas because they’re not wanted at home.`, `Famous Harry Potter. Can’t even go into a bookshop without making the front page.`, `I don’t think getting your head cut open makes you that special, myself.`, `You’d never know the Weasleys were purebloods, the way they behave.`]
+    DracoMalfoy: [`I do feel so sorry for all those people who have to stay at Hogwarts for Christmas because they’re not wanted at home.`, `Famous Harry Potter. Can’t even go into a bookshop without making the front page.`, `I don’t think getting your head cut open makes you that special, myself.`, `You’d never know the Weasleys were purebloods, the way they behave.`],
+
+    HelenaRavenclaw: [`I know what he's done! I know who he is! He defiled it! With dark magic!`]
 }
 
 revelioApp.locations = [`Diagon Alley`, `Eeylops Owl Emporium`, `Florean Fortescue's Ice Cream Parlour`, `Flourish & Blotts`, `Gringotts Wizarding Bank`, `Knockturn Alley`, `Borgin & Burkes`, `The Leaky Cauldron`, `Madam Malkin's Robes for All Occasions`, `Ollivanders`, `Quality Quidditch Supplies`, `Weasleys' Wizard Wheezes`, `Hogsmeade`, `The Three Broomsticks`, `Honeydukes`, `Zonko's Joke Shop`, `Hogsmeade Station`, `The Hog's Head`, `Dervish & Banges`, `St Mungo's Hospital for Magical Maladies and Injuries`, `King's Cross railway station`]
@@ -202,10 +204,100 @@ revelioApp.updateQuote = function () {
     }
 };
 
-// Update character's friend status
-revelioApp.updateFriendStatus = function () {
-    // append second date to date span
-    $(`.profile-friend-status .date`).append(revelioApp.finalDatesArray[1]);
+// Create arrays with similar characters grouped together for friend status updates and for friends list
+revelioApp.groupCharacters = function () {
+    // Groupings for friends
+    revelioApp.groupArray = [`house`, `deathEater`, `school`, `species`];
+    // get all character array
+    revelioApp.getAPIData("characters");
+    $.when(revelioApp.getData).then(function(res){
+        //  map through group array
+        revelioApp.groupArray.map(function(group){
+            // create empty group array
+            revelioApp[group] = []
+            // map through all characters and add all in same group to respective array
+            res.map(function (item) {
+                if (revelioApp.profileCharacter[group] === item[group] && revelioApp.profileCharacter[group] != false && revelioApp.profileCharacter[group] != '' && revelioApp.profileCharacter[group] != 'unknown' && revelioApp.profileCharacter[group] != undefined ) {
+                    revelioApp[group].push(item);
+                }
+            });
+        });
+        // when complete, update friend related sections
+        revelioApp.updateFriendStatus();
+        revelioApp.updateFriendsList();
+    });
+};
+
+// update friend status (character became friends with...)
+revelioApp.updateFriendStatus = function(){
+    // run through group array until name available to append to friend status
+    for ( i = 0; i < revelioApp.groupArray.length; i++) {
+        // if group array has items, store random character
+        if ( revelioApp[revelioApp.groupArray[i]].length > 0 ) {
+            randChar = revelioApp[revelioApp.groupArray[i]][Math.floor(Math.random() * revelioApp[revelioApp.groupArray[i]].length)];
+            // append random character to friend status
+            $(`.profile-friend-status .status`).append(`${revelioApp.profileCharacter.name} became friends with ${randChar.name}.`);
+            // update friend status date
+            $(`.profile-friend-status .date`).append(revelioApp.finalDatesArray[1]);
+            // exit loop
+            return
+        }
+    }
+};
+
+// update friends list with 6 characters from a similar group
+revelioApp.updateFriendsList = function(){
+    // empty array to add friends to
+    revelioApp.friendsList = [];
+        // run through group array until name available to append to friend status
+        for (i = 0; i < revelioApp.groupArray.length; i++) {
+            // create duplicate group array to splice from
+            let dupArray = revelioApp[revelioApp.groupArray[i]];
+            // if group array has items, store random character
+            if (dupArray.length > 0 ) {
+                // run through group at least 6 times before moving on to next group
+                for (j = 0; j < 6; j++) {
+                    // store random character spliced from duplicate array
+                    randCharr = dupArray.splice([Math.floor(Math.random() * dupArray.length)], 1);
+                    // add random character to friends list
+                    revelioApp.friendsList.push(randCharr);
+
+                    if (revelioApp.friendsList.length === 6) {
+                        // stop when 6 friends added
+                        revelioApp.updateFriendsListDiv();
+                        return
+                    }
+                }
+            }
+        }
+};
+
+revelioApp.updateFriendsListDiv = function(){
+    // loop through friendsList array
+    for (i = 0; i < revelioApp.friendsList.length; i++) {
+        // append character name from friendsList array to friends list div
+        $(`.friend-${i}`).append(`<caption>${revelioApp.friendsList[i][0].name}</caption>`);
+        // append picture if one exists
+        // store name
+        const friendName = revelioApp.friendsList[i][0].name;
+        // convert character name string to name with hyphens
+        const friendNameHyphen = friendName.replace(/ /g, '-');
+        // check if gif exists
+        $(`.friend-${i}-img`).load(`assets/profile-pictures/${friendNameHyphen}.gif`, function (response, status, xhr) {
+            // if error, use default and add alt with character name
+            if (status == "error") {
+                console.log(friendName);
+                console.log(friendNameHyphen);
+                $(this).attr('src', 'assets/profile-pictures/default.gif');
+                $(this).attr('alt', friendName);
+            }
+            // if it does, use URL and add alt with character name
+            else {
+                $(this).attr('src', `assets/profile-pictures/${friendNameHyphen}.gif`);
+                $(this).attr('alt', friendName);
+            }
+        });
+    }
 };
 
 // Update character's location
@@ -228,6 +320,6 @@ $(function () {
     revelioApp.updateProfileTextStats();
     revelioApp.dates();
     revelioApp.updateQuote();
-    revelioApp.updateFriendStatus();
+    revelioApp.groupCharacters();
     revelioApp.updateLocation();
 });
