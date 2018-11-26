@@ -123,7 +123,8 @@ app.displayResults = function (resultsArray, displayImage) {
     }
     else {
         for (let i = 0; i < resultsArray.length; i++) {
-            $('section#results > div > div').append(`<figure class='character character-container-${i + 1}'><img class='character-picture ${resultsArray[i].name}-picture'><figcaption>${resultsArray[i].name}</figcaption></figure>`);
+            let className = resultsArray[i].name.replace(/ /g, '-');
+            $('section#results > div > div').append(`<figure class='character character-container-${i + 1}'><img class='character-picture ${className}-picture' src='assets/profile-pictures/default-static.png'><figcaption>${resultsArray[i].name}</figcaption></figure>`);
             displayImage(resultsArray[i].name);
             app.charNameObjectPair[resultsArray[i].name] = resultsArray[i];
             console.log(app.charNameObjectPair);
@@ -169,18 +170,19 @@ app.hideProfile = function() {
 app.displayProfilePicture = function(name) {
     // convert character name string to name with hyphens
     const fileName = name.replace(/ /g, '-');
-    app.errorImageCheck();
-    $('section#results img').load(`assets/profile-pictures/${fileName}-static.png`, function() {
-        $(this).attr('src', `assets/profile-pictures/${fileName}-static.png`);
-        $(this).attr('alt', name);
+    $(`.${fileName}-picture`).load(`assets/profile-pictures/${fileName}-static.png`, function (response, status, xhr) {
+        // if error, use default and add alt with character name
+        if (status == "error") {
+            $(this).attr('alt', name);
+            console.log(`error: ${name}`);
+        }
+        // if it does, use URL and add alt with character name
+        else {
+            $(this).attr('src', `assets/profile-pictures/${fileName}-static.png`);
+            $(this).attr('alt', name);
+            console.log(`no error: ${name}`);
+        }
     });
-}
-
-app.errorImageCheck = function() {
-    $('img').on('error', function () {
-        $(this).attr('src', 'assets/profile-pictures/default-static.png');
-        $(this).attr('alt', 'spooky ghost');
-    })
 }
 
 // smooth-scroll
