@@ -250,7 +250,8 @@ input[type=submit] {
   padding: 10px 20px;
   -webkit-transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out;
   -o-transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out;
-  transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out; }
+  transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out;
+  font-size: 2rem; }
 
 input[type=submit]:hover {
   color: #82204a;
