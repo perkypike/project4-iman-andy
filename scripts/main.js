@@ -168,6 +168,9 @@ app.refreshProfile = function (element, nameObjectPair) {
         let characterName = $(this).next().text();
         app.profileCharacter = nameObjectPair[characterName];
         app.updateProfile();
+        $('#profile').animate({
+            scrollTop: "0px"
+        }, 800);
     })
 }
 

@@ -580,6 +580,9 @@ caption {
   margin: 0;
   padding: 5px; }
 
+.friend > img {
+  cursor: pointer; }
+
 @media (max-width: 1000px) {
   .results-area {
     grid-template-columns: repeat(3, 1fr); } }
