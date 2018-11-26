@@ -8,24 +8,23 @@
     <link href="https://fonts.googleapis.com/css?family=Lobster|Poppins:400,700,900" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU"
         crossorigin="anonymous">
-    <title>Revelio</title>
+    <title>REVELIO</title>
     <link rel='stylesheet' href='styles/style.css'> 
 </head>
 <body>
     <!-- SKIP LINK TO MAIN CONTENT FOR ACCESSIBILITY -->
     <a href='#main-content' class='skip-link'>Skip to main content</a>
-    <!-- below is for position sticky items -->
-    <div class="fixed-nav">
-
-    </div>
+    <!-- MAIN CONTENT -->
     <main id="main-content">
         <!-- SEARCH BAR SECTION STARTS -->
-        <section class="search">
+        <section id="search" class="search">
             <div class="wrapper">
                 <h1>Revelio</h1>
+                <p class="search-heading">A Hogwarts Social Media Site</p>
+                <p>Search via their names, patronus, house, etc.</p>
                 <form action="#results" class="search-form">
                     <label for="search-field" class="visuallyhidden">Search Field</label>
-                    <input type="text" name="search-field" pattern=".{3,}" placeholder="Search (ex. Malfoy "autocomplete="off" required>
+                    <input type="text" name="search-field" pattern=".{3,}" placeholder="Search (ex. Malfoy)"autocomplete="off" required>
                     <input type="submit" value="Revelio!">
                 </form>
             </div>
@@ -40,8 +39,129 @@
         </section>
         <!-- RESULTS SECTION ENDS -->
         <!-- PROFILE MODAL POPUP SECTION STARTS -->
-        <section class="profile-modal-popup">
-        </section>
+        <div id="profile" class="profile">
+            <div class="wrapper">
+                <div class="profile-header">
+                    <h3 title="Revelio"><a href="index.html">R</a></h3>
+                    <h3 title="Revelio"><a href="#results"><i class="fab fa-searchengin fa-flip-horizontal"></i></a></h3>
+                    <!-- To substitute profile picture here -->
+                    <img src="assets/profile-pictures/default.gif" alt="">
+                    <h2>
+                        <!-- To append character name here -->
+                    </h2>
+                </div>
+                <div class="profile-icon-stats">
+                    <!-- To substitute characteristic icons and names here -->
+                    <div class="icon-container school-container">
+                        <img src="assets/icon-stats/school.png" class="school">
+                        <span class="icon-span"></span>
+                    </div>
+                    <div class="icon-container house-container">
+                        <img src="assets/icon-stats/house.png" class="house">
+                        <span class="icon-span"></span>
+                    </div>
+                    <div class="icon-container species-container">
+                        <img src="assets/icon-stats/species.png" class="species">
+                        <span class="icon-span"></span>
+                    </div>
+                    <div class="icon-container dumbledoresArmy-container">
+                        <img src="assets/icon-stats/dumbledoresArmy.png" class="dumbledoresArmy">
+                        <span class="icon-span">Dumbledore's Army</span>
+                    </div>
+                    <div class="icon-container bloodStatus-container">
+                        <img src="assets/icon-stats/bloodStatus.png" class="bloodStatus">
+                        <span class="icon-span"></span>
+                    </div>
+                    <div class="icon-container patronus-container">
+                        <img src="assets/icon-stats/patronus.png" class="patronus">
+                        <span class="icon-span">Patronus</span>
+                    </div>
+                    <div class="icon-container deathEater-container">
+                        <img src="assets/icon-stats/deathEater.png" class="deathEater">
+                        <span class="icon-span">Death Eater</span>
+                    </div>
+                    <div class="icon-container orderOfThePhoenix-container">
+                        <img src="assets/icon-stats/orderOfThePhoenix.png" class="orderOfThePhoenix">
+                        <span class="icon-span">Order of the Phoenix</span>
+                    </div>
+                    <div class="icon-container ministryOfMagic-container">
+                        <img src="assets/icon-stats/ministryOfMagic.png" class="ministryOfMagic">
+                        <span class="icon-span">Ministry of Magic</span>
+                    </div>
+                </div>
+                <div class="profile-text-stats">
+                    <h2>&</h2>
+                    <div class="text-container divider">
+                        <span class="text-property divider-span"></span>
+                        <span class="text-value divider-span"></span>
+                    </div>
+                    <!-- To substitute characteristic values here -->
+                    <div class="text-container alias-container">
+                        <span class="text-property">Alias</span>
+                        <span class="text-value alias"></span>
+                    </div>
+                    <div class="text-container role-container">
+                        <span class="text-property">Role</span>
+                        <span class="text-value role"></span>
+                    </div>
+                    <div class="text-container wand-container">
+                        <span class="text-property">Wand</span>
+                        <span class="text-value wand"></span>
+                    </div>
+                    <div class="text-container boggart-container">
+                        <span class="text-property">Boggart</span>
+                        <span class="text-value boggart"></span>
+                    </div>
+                    <div class="text-container animagus-container">
+                        <span class="text-property">Animagus</span>
+                        <span class="text-value animagus"></span>
+                    </div>
+                    <div class="text-container divider">
+                        <span class="text-property divider-span"></span>
+                        <span class="text-value divider-span"></span>
+                    </div>
+                </div>
+                <div class="status-updates">
+                    <div class="profile-quote-status">
+                        <div class="quote">
+                            <span class="status-updates-span quote-symbol">“</span>
+                            <span class="status status-updates-span"></span>
+                        </div>
+                        <span class="status-updates-span date"></span>
+                    </div>
+                    <div class="profile-friend-status">
+                        <span class="status-updates-span date"></span>
+                        <span class="status status-updates-span"></span>
+                    </div>
+                    <div class="profile-location-status">
+                        <span class="status status-updates-span"></span>
+                        <span class="status-updates-span date"></span>
+                    </div>
+                </div>
+                <h2 class="friends">Friends</h2>
+                <div class="profile-friends-list">
+                    <!-- friend pictures to be appended here -->
+                    <div class="friend friend-0">
+                        <img class="friend-0-img" src="assets/profile-pictures/default.gif" alt="">
+                    </div>
+                    <div class="friend friend-1">
+                        <img class="friend-1-img" src="assets/profile-pictures/default.gif" alt="">
+                    </div>
+                    <div class="friend friend-2">
+                        <img class="friend-2-img" src="assets/profile-pictures/default.gif" alt="">
+                    </div>
+                    <div class="friend friend-3">
+                        <img class="friend-3-img" src="assets/profile-pictures/default.gif" alt="">
+                    </div>
+                    <div class="friend friend-4">
+                        <img class="friend-4-img" src="assets/profile-pictures/default.gif" alt="">
+                    </div>
+                    <div class="friend friend-5">
+                        <img class="friend-5-img" src="assets/profile-pictures/default.gif" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
         <!-- PROFILE MODAL POPUP SECTION ENDS -->
     </main>
 

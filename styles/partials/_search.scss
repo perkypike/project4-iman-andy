@@ -1,17 +1,52 @@
+// Search styles
 
+// Search container
 .search {
     min-height: 100vh;
-    // width: 100%;
     max-width: 1600px;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
+.search .wrapper {
+    text-align: center;
+}
+
+// Search text
+.search p {
+    font-size: 2rem;
+}
+
+.search-heading {
+    text-transform: uppercase;
+}
+
+// Search forms
 .search > div,
 .search-form {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+input[type=text] {
+    padding: 10px 20px;
+    width: 30vw;
+    margin-bottom: 20px;
+}
+
+input[type=submit] {
+    color: $white-shade;
+    border: none;
+    background-color: $secondary-color;
+    padding: 10px 20px;
+    transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out;
+
+}
+
+input[type=submit]:hover {
+    color: $secondary-color;
+    background-color: $white-shade;
 }
