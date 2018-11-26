@@ -160,6 +160,7 @@ legend, button::-moz-focus-inner, input::-moz-focus-inner {
   transform: translate(-50%); }
 
 html {
+  scroll-behavior: smooth;
   font-size: 62.5%; }
 
 body {
@@ -271,7 +272,8 @@ input[type=submit] {
   padding: 10px 20px;
   -webkit-transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out;
   -o-transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out;
-  transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out; }
+  transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out;
+  font-size: 2rem; }
 
 button {
   background: none;
@@ -323,6 +325,17 @@ button:hover {
 
 #results {
   display: none; }
+
+.results-header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  max-width: 1000px;
+  width: 80%;
+  margin: 0 auto; }
 
 .results-area {
   position: relative;

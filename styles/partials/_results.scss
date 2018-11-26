@@ -4,6 +4,14 @@
     display: none;
 }
 
+.results-header {
+    display: flex;
+    justify-content: space-between;
+    max-width: 1000px;
+    width: 80%;
+    margin: 0 auto;
+}
+
 .results-area {
     position: relative;
     display: grid;

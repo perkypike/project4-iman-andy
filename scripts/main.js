@@ -139,7 +139,6 @@ app.displayResults = function (resultsArray, displayImage) {
             $('section#results > div > div').append(`<figure class='character character-container-${i + 1}'><img class='character-picture ${className}-picture' src='assets/profile-pictures/default-static.png'><figcaption>${resultsArray[i].name}</figcaption></figure>`);
             displayImage(resultsArray[i].name);
             app.charNameObjectPair[resultsArray[i].name] = resultsArray[i];
-            console.log(app.charNameObjectPair);
         }
         app.showProfile('.character-picture', app.charNameObjectPair);
     }
