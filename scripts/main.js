@@ -17,21 +17,24 @@ app.init = function () {
     app.getSearchText(app.initiateSearch);
 }
 
-// on form submit, gets the value of the search text
+// click event listeners for searchpage
 app.getSearchText = function (startSearch) {
     $('.about').on('click', function (event) {
         // display about modal
         $('.about-popup').fadeIn('slow', function () {
             $('.about-popup').css('display', 'block');
+            $('html').css('overflow-y', 'hidden');
         })
     });
     $('.close').on('click', function (event) {
         // hide about modal
         $('.about-popup').fadeOut('slow', function () {
             $('.about-popup').css('display', 'none');
+            $('html').css('overflow-y', 'auto');
         })
     });
     $('.search-form').on('submit', function (event) {
+        // form submission event
         event.preventDefault();
         app.searchText = $('input[type=text]').val();
         app.regExName = new RegExp(app.searchText, 'i');
