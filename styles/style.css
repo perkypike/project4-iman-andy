@@ -160,6 +160,7 @@ legend, button::-moz-focus-inner, input::-moz-focus-inner {
   transform: translate(-50%); }
 
 html {
+  scroll-behavior: smooth;
   font-size: 62.5%; }
 
 body {

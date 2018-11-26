@@ -279,7 +279,6 @@ app.friendsListObject = function(friendsList) {
     friendsList.forEach(function (friends) {
         app.friendsNameObjectPair[friends[0].name] = friends[0];
     })
-    console.log(app.friendsNameObjectPair);
 }
 
 app.updateFriendsListDiv = function () {
