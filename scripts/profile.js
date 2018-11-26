@@ -82,7 +82,8 @@ app.updateProfileIconStats = function(){
                     $(this).css("display", "inline-block");
                     $(`.${item}-container`).css("display", "block");
                     $(this).siblings().css("display", "inline-block");
-                    if ($(this).siblings().is(':empty')) {
+                    if ( item === 'school' || item === 'house' || item === 'bloodStatus' || item === 'species' ) {
+                        $(this).siblings().empty();
                         $(this).siblings().append(`${app.profileCharacter[item]}`);
                     }
                 }
