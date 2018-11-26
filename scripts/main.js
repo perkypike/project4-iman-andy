@@ -62,6 +62,7 @@ app.initiateSearch = function () {
 // clear search results
 app.clearResults = function () {
     // reset search results array in case of new search
+    app.charNameObjectPair = {};
     app.rawResults = [];
     app.searchResults = [];
     $('section#results > div > div').empty();
@@ -122,7 +123,7 @@ app.displayResults = function (resultsArray, displayImage) {
     }
     else {
         for (let i = 0; i < resultsArray.length; i++) {
-            $('section#results > div > div').append(`<figure class='character character-container-${i+1}'><img class='character-picture'><figcaption>${resultsArray[i].name}</figcaption></figure>`);
+            $('section#results > div > div').append(`<figure class='character character-container-${i + 1}'><img class='character-picture ${resultsArray[i].name}-picture'><figcaption>${resultsArray[i].name}</figcaption></figure>`);
             displayImage(resultsArray[i].name);
             app.charNameObjectPair[resultsArray[i].name] = resultsArray[i];
             console.log(app.charNameObjectPair);
@@ -131,12 +132,13 @@ app.displayResults = function (resultsArray, displayImage) {
     }
 }
 
-
-app.showProfile = function(element, nameObjectPair) {
-    $(element).on('click', function() {
-        app.profileCharacter = nameObjectPair[$(this).next().text()];
-        console.log(app.profileCharacter);
-        $('.profile').fadeIn('slow', function() {
+// display initial profile (displays after selecting a character profile from the results page)
+app.showProfile = function (element, nameObjectPair) {
+    $(element).off('click');
+    $(element).on('click', function () {
+        let characterName = $(this).next().text();
+        app.profileCharacter = nameObjectPair[characterName];
+        $('.profile').fadeIn('slow', function () {
             $('.profile').css('display', 'block');
             app.updateProfile();
             $('#results').css('display', 'none');
@@ -144,7 +146,16 @@ app.showProfile = function(element, nameObjectPair) {
         $('h3').on('click', function () {
             app.hideProfile();
         });
-        // setTimeout(window.scrollTo(0, 0), 200);
+    })
+}
+
+// refreshes the current profile to the selected character profile
+app.refreshProfile = function (element, nameObjectPair) {
+    $(element).off('click');
+    $(element).on('click', function () {
+        let characterName = $(this).next().text();
+        app.profileCharacter = nameObjectPair[characterName];
+        app.updateProfile();
     })
 }
 
@@ -157,7 +168,7 @@ app.hideProfile = function() {
 
 app.displayProfilePicture = function(name) {
     // convert character name string to name with hyphens
-    const fileName = name.replace(' ', '-');
+    const fileName = name.replace(/ /g, '-');
     app.errorImageCheck();
     $('section#results img').load(`assets/profile-pictures/${fileName}-static.png`, function() {
         $(this).attr('src', `assets/profile-pictures/${fileName}-static.png`);

@@ -49,7 +49,7 @@ app.updateProfileHeading = function(){
 // update profile picture with gif if one exists, otherwise, use default png
 app.updateProfilePicture = function(){
     // convert character name string to name with hyphens
-    const fileName = app.profileCharacter.name.replace(' ', '-');
+    const fileName = app.profileCharacter.name.replace(/ /g, '-');
     // check if gif exists
     $('.profile-header img').load(`assets/profile-pictures/${fileName}.gif`, function (response, status, xhr) {
         // if error, use default and add alt with character name
@@ -180,7 +180,7 @@ app.updateQuote = function () {
     $(`.quote .status`).empty();
     $(`.profile-quote-status .date`).empty();
     //store character name without spaces
-    const char = app.profileCharacter.name.replace(' ', '');
+    const char = app.profileCharacter.name.replace(/ /g, '');
     // // loop through object of quotes
     for (character in app.quotes) {
         // check if key is the same as character name
@@ -205,14 +205,14 @@ app.groupCharacters = function () {
     app.groupArray = [`house`, `deathEater`, `school`, `species`];
     // get all character array
     app.getAPIData("characters");
-    $.when(app.getData).then(function(res){
+    $.when(app.getData).then(function (res) {
         //  map through group array
-        app.groupArray.map(function(group){
+        app.groupArray.map(function (group) {
             // create empty group array
             app[group] = []
             // map through all characters and add all in same group to respective array
             res.map(function (item) {
-                if (app.profileCharacter[group] === item[group] && app.profileCharacter[group] != false && app.profileCharacter[group] != '' && app.profileCharacter[group] != 'unknown' && app.profileCharacter[group] != undefined ) {
+                if (app.profileCharacter[group] === item[group] && app.profileCharacter[group] != false && app.profileCharacter[group] != '' && app.profileCharacter[group] != 'unknown' && app.profileCharacter[group] != undefined) {
                     app[group].push(item);
                 }
             });
@@ -221,6 +221,8 @@ app.groupCharacters = function () {
         app.updateFriendStatus();
         app.updateFriendsList();
         app.friendsListObject(app.friendsList);
+    }).then(() => {
+        app.refreshProfile('.friend > img', app.friendsNameObjectPair);
     });
 };
 
@@ -279,9 +281,9 @@ app.friendsListObject = function(friendsList) {
     console.log(app.friendsNameObjectPair);
 }
 
-app.updateFriendsListDiv = function(){
+app.updateFriendsListDiv = function () {
     // reset section
-    $('caption').empty();
+    $('caption').remove();
     // loop through friendsList array
     for (i = 0; i < app.friendsList.length; i++) {
         // append character name from friendsList array to friends list div
@@ -305,7 +307,6 @@ app.updateFriendsListDiv = function(){
             }
         });
     }
-    app.showProfile('.friend > img', app.friendsNameObjectPair); // ANDY
 };
 
 // Update character's location
