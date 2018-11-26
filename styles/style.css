@@ -259,6 +259,17 @@ input[type=submit]:hover {
 #results {
   display: none; }
 
+.results-header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  max-width: 1000px;
+  width: 80%;
+  margin: 0 auto; }
+
 .results-area {
   position: relative;
   display: grid;
