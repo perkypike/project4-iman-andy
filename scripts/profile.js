@@ -87,7 +87,7 @@ app.updateProfileIconStats = function(){
                         $(this).siblings().append(`${app.profileCharacter[item]}`);
                     }
                 }
-            // if no matching patronus icon, do nothing
+            // if no matching patronus or species icon, do nothing
                 else if (item === 'patronus') {
                     return
                 }

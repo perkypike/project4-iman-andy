@@ -57,6 +57,10 @@ h3 {
     font-size: 8rem;
 }
 
+h3:hover {
+    text-shadow: 2px 2px $white-shade;
+}
+
 p {
     margin: 0;
     padding: 0;

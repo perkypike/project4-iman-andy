@@ -4,10 +4,6 @@
     .results-area {
         grid-template-columns: repeat(3, 1fr);
     }
-
-    input[type=text] {
-        // width: 40vw;
-    }
 }
 
 
@@ -16,20 +12,101 @@
         grid-template-columns: repeat(2, 1fr);
     }
 
-    input[type=text] {
-        // width: 50vw;
+    h3 {
+        font-size: 6rem;
+    }
+
+    .profile-friends-list {
+        grid-template-columns: 1fr 1fr;
+        grid-gap: 20px;
+    }
+}
+
+@media (max-width: 730px) {
+    h1 {
+        font-size: 15rem;
+        line-height: 15rem;
+    }
+}
+
+@media(max-width: 650px) {
+    .profile-header h2 {
+        font-size: 8rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .text-container {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .profile-text-stats {
+        padding-bottom: 50px;
+    }
+
+    .profile-friend-status, .profile-quote-status, .profile-location-status {
+        grid-template-columns: auto;
+        grid-template-rows: auto auto;
+        padding-bottom: 50px;
+    }
+
+    .profile-friend-status .date {
+        grid-row: 2 / 3;
+    }
+
+    .profile-friend-status .status {
+        grid-row: 1 / 2;
     }
 }
 
 @media (max-width: 560px) {
+
+    h1 {
+        font-size: 10rem;
+        line-height: 10rem;
+    }
+
+    .about, .close {
+        font-size: 3.5rem;
+    }
+
     input[type=text] {
-        // width: 60vw;
+        padding: 10px 20px;
+        margin-bottom: 20px;
+        font-size: 2rem;
+    }
+
+    .profile-friends-list {
+        grid-template-columns: 1fr;
+        grid-gap: 30px;
+    }
+}
+
+@media (max-width: 500px) {
+    .text-property {
+        font-size: 2rem;
+    }
+
+    .text-value {
+        font-size: 1.7rem;
+    }
+
+    .profile-header h2 {
+        font-size: 6rem;
     }
 }
 
 @media (max-width: 440px) {
     .results-area {
         grid-template-columns: 1fr;
+    }
+
+    .results-header {
+        display: none;
+    }
+
+    .profile-icon-stats {
+        padding-bottom: 10px;
     }
 }
 
@@ -38,11 +115,23 @@
         min-width: 320px;
     }
 
-    h1 {
-        font-size: 10rem;
-    }
-
     h2 {
         font-size: 9rem;
+    }
+
+    input[type=text] {
+        width: 90vw;
+    }
+
+    .text-property {
+        font-size: 1.6rem;
+    }
+
+    .text-value {
+        font-size: 1.5rem;
+    }
+
+    .profile-header h2 {
+        font-size: 4rem;
     }
 }
