@@ -36,7 +36,7 @@ app.quotes = {
     HelenaRavenclaw: [`I know what he's done! I know who he is! He defiled it! With dark magic!`]
 }
 
-app.locations = [`Diagon Alley`, `Eeylops Owl Emporium`, `Florean Fortescue's Ice Cream Parlour`, `Flourish & Blotts`, `Gringotts Wizarding Bank`, `Knockturn Alley`, `Borgin & Burkes`, `The Leaky Cauldron`, `Madam Malkin's Robes for All Occasions`, `Ollivanders`, `Quality Quidditch Supplies`, `Weasleys' Wizard Wheezes`, `Hogsmeade`, `The Three Broomsticks`, `Honeydukes`, `Zonko's Joke Shop`, `Hogsmeade Station`, `The Hog's Head`, `Dervish & Banges`, `St Mungo's Hospital for Magical Maladies and Injuries`, `King's Cross railway station`]
+app.locations = [`Diagon Alley`, `Eeylops Owl Emporium`, `Florean Fortescue's Ice Cream Parlour`, `Flourish & Blotts`, `Gringotts Wizarding Bank`, `Knockturn Alley`, `Borgin & Burkes`, `The Leaky Cauldron`, `Madam Malkin's Robes for All Occasions`, `Ollivanders`, `Quality Quidditch Supplies`, `Weasleys' Wizard Wheezes`, `Hogsmeade`, `The Three Broomsticks`, `Honeydukes`, `Zonko's Joke Shop`, `Hogsmeade Station`, `The Hog's Head`, `Dervish & Banges`, `St. Mungo's Hospital for Magical Maladies and Injuries`, `King's Cross railway station`]
 
 // update profile heading and page title with character's name
 app.updateProfileHeading = function(){
@@ -67,6 +67,8 @@ app.updateProfilePicture = function(){
 
 // update any characteristics that correspond with icon stats (ex, house, school, species)
 app.updateProfileIconStats = function(){
+    // reset section
+    $(`.icon-container`).css(`display`, `none`);
     // map through array of icon characeristics
     app.profileIconCharacteristics.forEach(function(item){
         // check if icon characteristic exists and is true (otherwise, do nothing)
@@ -94,7 +96,11 @@ app.updateProfileIconStats = function(){
                     $(this).attr('alt', app.profileCharacter.item);
                     $(this).css("display", "block");
                     $(`.${item}-container`).css("display", "inline-block");
+                    // empty caption
+                    $(this).siblings().empty();
+                    // display caption
                     $(this).siblings().css("display", "inline-block");
+                    // append description to caption
                     $(this).siblings().append(`${app.profileCharacter[item]}`);
                 }
             })
@@ -104,6 +110,10 @@ app.updateProfileIconStats = function(){
 
 // update any characteristics that correspond with text stats (alias, role, wand, bogart, animagus)
 app.updateProfileTextStats = function () {
+    // reset section
+    $(`.profile-text-stats h2`).css(`display`, `none`);
+    $(`.text-container`).css('display', 'none');
+    $('.divider').css('display', 'none');
     // map through array of text characeristics
     app.profileTextCharacteristics.forEach(function (item) {
         // check if text characteristic exists and is not unknown (otherwise, do nothing)
@@ -112,6 +122,8 @@ app.updateProfileTextStats = function () {
             $(`.profile-text-stats h2`).css('display', 'block')
             $(`.${item}-container`).css('display', 'grid');
             $('.divider').css('display', 'grid');
+            // empty item
+            $(`.${item}`).empty();
             // append value of item to value span
             $(`.${item}`).append(app.profileCharacter[item]);
         }
@@ -163,6 +175,10 @@ app.dates = function(){
 
 // Update quote text with character quote, if one exists
 app.updateQuote = function () {
+    // reset section
+    $(`.profile-quote-status`).css('display', 'none');
+    $(`.quote .status`).empty();
+    $(`.profile-quote-status .date`).empty();
     //store character name without spaces
     const char = app.profileCharacter.name.replace(' ', '');
     // // loop through object of quotes
@@ -210,6 +226,9 @@ app.groupCharacters = function () {
 
 // update friend status (character became friends with...)
 app.updateFriendStatus = function(){
+    // reset section
+    $(`.profile-friend-status .status`).empty();
+    $(`.profile-friend-status .date`).empty();
     // run through group array until name available to append to friend status
     for ( i = 0; i < app.groupArray.length; i++) {
         // if group array has items, store random character
@@ -261,6 +280,8 @@ app.friendsListObject = function(friendsList) {
 }
 
 app.updateFriendsListDiv = function(){
+    // reset section
+    $('caption').empty();
     // loop through friendsList array
     for (i = 0; i < app.friendsList.length; i++) {
         // append character name from friendsList array to friends list div
@@ -289,6 +310,9 @@ app.updateFriendsListDiv = function(){
 
 // Update character's location
 app.updateLocation = function () {
+    // reset section
+    $(`.profile-location-status .status`).empty();
+    $(`.profile-location-status .date`).empty();
     // pick a random location
     let location = app.locations[Math.floor(Math.random() * app.locations.length)];
     // append location to location span
