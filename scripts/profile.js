@@ -7,6 +7,8 @@ app.profileTextCharacteristics = [
 ]
 
 app.quotes = {
+    HarryPotter: [`I had a dream about a motorcycle. It was flying.`, `Brilliant! It’s Potions last thing on Friday! Snape won’t have time to poison us all!`, `Quirrell was a great teacher. There was just that minor drawback of him having Lord Voldemort sticking out of the back of his head.`, `I like a quiet life, you know me.`],
+
     RonaldWeasley: [`From now on, I don’t care if my tea leaves spell out die, Ron, die — I’m just chucking them in the bin where they belong.`, `Can you believe our luck? Of all the trees we could’ve hit, we had to get one that hits back.`, `Don't let the Muggles get you down!`],
 
     ArthurWeasley: [`Never trust anything that can think for itself if you can’t see where it keeps its brain.`],
@@ -29,11 +31,15 @@ app.quotes = {
 
     KingsleyShacklebolt: [`Every human life is worth the same, and worth saving.`],
 
-    GeorgeWeasley: [`New study finds Death Eaters have the worst grammar on Revelio. &#xF602`],
+    GeorgeWeasley: [`New study finds Death Eaters have the worst grammar on Revelio.`],
 
     DracoMalfoy: [`I do feel so sorry for all those people who have to stay at Hogwarts for Christmas because they’re not wanted at home.`, `Famous Harry Potter. Can’t even go into a bookshop without making the front page.`, `I don’t think getting your head cut open makes you that special, myself.`, `You’d never know the Weasleys were purebloods, the way they behave.`],
 
-    HelenaRavenclaw: [`I know what he's done! I know who he is! He defiled it! With dark magic!`]
+    HelenaRavenclaw: [`I know what he's done! I know who he is! He defiled it! With dark magic!`],
+
+    TomRiddle: [`How many will be brave enough to return when they feel it? And how many will be foolish enough to stay away?`, `There is nothing worse than death`, `I wondered what you know about... Horcruxes?`, `How do you split your soul?` ],
+
+    MinervaMcGonagall: [`Even the Muggles have noticed something’s going on. It was on their news. I heard it. Flocks of owls . . . shooting stars. . . . Well, they’re not completely stupid. They were bound to notice something.`]
 }
 
 app.locations = [`Diagon Alley`, `Eeylops Owl Emporium`, `Florean Fortescue's Ice Cream Parlour`, `Flourish & Blotts`, `Gringotts Wizarding Bank`, `Knockturn Alley`, `Borgin & Burkes`, `The Leaky Cauldron`, `Madam Malkin's Robes for All Occasions`, `Ollivanders`, `Quality Quidditch Supplies`, `Weasleys' Wizard Wheezes`, `Hogsmeade`, `The Three Broomsticks`, `Honeydukes`, `Zonko's Joke Shop`, `Hogsmeade Station`, `The Hog's Head`, `Dervish & Banges`, `St. Mungo's Hospital for Magical Maladies and Injuries`, `King's Cross railway station`]
