@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU"
         crossorigin="anonymous">
     <title>REVELIO</title>
-    <link rel='stylesheet' href='styles/style.css'> 
+    <link rel='stylesheet' href='styles/style.css'>
 </head>
 <body>
     <!-- SKIP LINK TO MAIN CONTENT FOR ACCESSIBILITY -->
@@ -19,16 +19,17 @@
         <!-- SEARCH BAR SECTION STARTS -->
         <section id="search" class="search">
             <div class="wrapper">
+                <span class="about">
+                    <a href="#about"><i class="fas fa-question-circle"></i></a>
+                </span>
                 <h1>Revelio</h1>
-                <p class="search-heading">A Hogwarts Social Media Site</p>
-                <p>Search via their names, patronus, house, etc.</p>
                 <form action="#results" class="search-form">
-                    <label for="search-field" class="visuallyhidden">Search Field</label>
-                    <input type="text" name="search-field" pattern=".{3,}" placeholder="Search (ex. Malfoy)"autocomplete="off" required>
-                    <input type="submit" value="Revelio!">
+                    <label for="search-field" class="visuallyhidden">Search</label>
+                    <input type="text" name="search-field" pattern=".{3,}" aria-label="Search" placeholder="Search (ex. Malfoy)"autocomplete="off" required>
+                    <button type="submit" name="button" id="button"><img src="assets/icons/wand.png" /></button>
                 </form>
             </div>
-        </section> 
+        </section>
         <!-- SEARCH BAR SECTION ENDS -->
         <!-- RESULTS SECTION STARTS -->
         <section id="results">
@@ -167,6 +168,21 @@
             </div>
         </div>
         <!-- PROFILE MODAL POPUP SECTION ENDS -->
+        <!-- ABOUT MODAL POPUP SECTION STARTS -->
+        <div id="about" class="about-popup">
+            <div class="wrapper">
+                <span class="close">
+                    <a href="#"><i class="fas fa-times-circle"></i></a>
+                </span>
+                <h2>About</h2>
+                <p>Revelio is a social network for the wizarding world. The name is inspired by the Homenum Revelio charm, which reveals the presence of humans in the vicinity.</p>
+                <span class="question">How do I use Revelio?</span>
+                <p>It's easy! Just type in a character name to look up anyone ("Harry", "Remus", "Tom Riddle") or type in other references to get a list of matching individuals ("Gryffindor", "Death eater", "ghost").</p>
+                <span class="question">Credits</span>
+                <p>Developed by Andy and Iman.</p>
+            </div>
+        </div>
+        <!-- ABOUT MODAL POPUP SECTION ENDS -->
     </main>
 
     <!-- JS SCRIPTS -->

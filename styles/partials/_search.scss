@@ -7,19 +7,38 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
 }
 
 .search .wrapper {
     text-align: center;
 }
 
+// About button
+.about {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    font-size: 5rem;
+    color: $secondary-color;
+}
+
+// Close button
+.close {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    font-size: 5rem;
+    color: $secondary-color;
+}
+
+.about:hover {
+    text-shadow: 1px 1px $fade-color;
+}
+
 // Search text
 .search p {
     font-size: 2rem;
-}
-
-.search-heading {
-    text-transform: uppercase;
 }
 
 // Search forms
@@ -32,9 +51,14 @@
 }
 
 input[type=text] {
-    padding: 10px 20px;
-    width: 30vw;
+    background: $fade-color;
+    color: $white-shade;
+    border: 0;
+    padding: 12px 30px;
+    width: 80vh;
+    max-width: 1500px;
     margin-bottom: 20px;
+    font-size: 3rem;
 }
 
 input[type=submit] {
@@ -46,7 +70,51 @@ input[type=submit] {
     font-size: 2rem;
 }
 
-input[type=submit]:hover {
-    color: $secondary-color;
-    background-color: $white-shade;
+button {
+    background: none;
+    border: none;
+    transform: rotate(0deg);
+    transition: transform 0.8s;
+}
+
+button:focus {
+    outline: none;
+    border: none;
+}
+
+button img {
+    width: 50%;
+}
+
+button:hover {
+    transform: rotate(10deg);
+}
+
+// Overlay container
+.about-popup {
+    width: 100vw;
+    height: 100vh;
+    margin: 0 auto;
+    position: fixed;
+    overflow-y: scroll;
+    top: 0;
+    left: 0;
+    z-index: 20;
+    display: none;
+    background: $primary-color;
+    font-size: 2rem;
+}
+
+.about-popup h2 {
+    margin: 50px 0 30px;
+}
+
+.about-popup .question {
+    text-transform: uppercase;
+    font-weight: 900;
+    color: $accent-color;
+    font-size: 2.5rem;
+    margin: 25px 0 15px;
+    display: block;
+
 }
