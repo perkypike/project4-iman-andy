@@ -19,6 +19,18 @@ app.init = function () {
 
 // on form submit, gets the value of the search text
 app.getSearchText = function (startSearch) {
+    $('.about').on('click', function (event) {
+        // display about modal
+        $('.about-popup').fadeIn('slow', function () {
+            $('.about-popup').css('display', 'block');
+        })
+    });
+    $('.close').on('click', function (event) {
+        // hide about modal
+        $('.about-popup').fadeOut('slow', function () {
+            $('.about-popup').css('display', 'none');
+        })
+    });
     $('.search-form').on('submit', function (event) {
         event.preventDefault();
         app.searchText = $('input[type=text]').val();
